@@ -35,7 +35,12 @@ class AddBook extends React.Component {
     };
     this.setState({ newBook: thisBook
     })
-    await axios.post(API_URL, this.state.newBook);
+    try {
+      await axios.post(API_URL, this.state.newBook);
+    } catch (error) {
+      console.error("Book could not be posted");
+    }
+
   }
 
   render() {

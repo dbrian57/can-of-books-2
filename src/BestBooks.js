@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
+import DeleteButton from './DeleteButton';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -23,6 +24,28 @@ class BestBooks extends React.Component {
     this.getBooks();
   }
 
+  deleteBook = async (book) => {
+    let id = book._id
+    console.log(book);
+    let newBooks = this.state.books;
+    newBooks = this.state.books.filter(item => (item._id !== id))
+    this.setState({
+      books: newBooks
+    })
+
+    try {
+      const config = {
+        params: {email: this.props.user.email},
+        method: 'delete',
+        baseURL: process.env.REACT_APP_SERVER,
+        url: `/books/${id}`
+      }
+      axios(config)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   render() {
 
 
@@ -39,12 +62,13 @@ class BestBooks extends React.Component {
                 key={idx}>
                 <img
                   className="d-block w-100 h-50"
-                  // src={bookImg}
+                  src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1752&q=80"
                   alt={book.title}
                 />
                 <Carousel.Caption>
                   <h1>{book.title}</h1>
                   <h3>{book.description}</h3>
+                  <DeleteButton book={book} deleteBook={this.deleteBook} />
                 </Carousel.Caption>
               </Carousel.Item>))}
           </Carousel>
