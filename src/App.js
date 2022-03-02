@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from './Profile';
+import AddBook from './AddBook'
 import {
   BrowserRouter as Router,
   Switch,
@@ -50,6 +51,7 @@ class App extends React.Component {
               }
             </Route>
           </Switch>
+          <AddBook />
           <Footer />
         </Router>
       </>
