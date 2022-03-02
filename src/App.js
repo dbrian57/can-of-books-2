@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Profile from './Profile';
 import {
   BrowserRouter as Router,
   Switch,
@@ -38,9 +39,16 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/">
               {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
+              
               <BestBooks />
             </Route>
             {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
+            <Route exact path='/profile'>
+              { 
+                this.state.user &&
+                <Profile user={this.state.user} />
+              }
+            </Route>
           </Switch>
           <Footer />
         </Router>
