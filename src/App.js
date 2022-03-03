@@ -10,6 +10,7 @@ import {
   Route
 } from "react-router-dom";
 import BestBooks from './BestBooks';
+// import UpdateBookForm from './UpdateBookForm';
 
 class App extends React.Component {
 
@@ -54,6 +55,7 @@ class App extends React.Component {
             </Route>
           </Switch>
           <AddBook />
+          {/* <UpdateBookForm  /> */}
           <Footer />
         </Router>
       </>
