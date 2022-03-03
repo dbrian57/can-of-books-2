@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import DeleteButton from './DeleteButton';
+import UpdateBookForm from './UpdateBookForm';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -69,12 +70,15 @@ class BestBooks extends React.Component {
                   <h1>{book.title}</h1>
                   <h3>{book.description}</h3>
                   <DeleteButton book={book} deleteBook={this.deleteBook} />
+                  <UpdateBookForm book={book}/>
                 </Carousel.Caption>
               </Carousel.Item>))}
           </Carousel>
         ) : (
           <h3>No Books Found :</h3>
         )}
+        
+
       </>
     )
   }
