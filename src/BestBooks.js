@@ -3,6 +3,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import DeleteButton from './DeleteButton';
 import UpdateBookForm from './UpdateBookForm';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -14,6 +15,14 @@ class BestBooks extends React.Component {
 
   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
   getBooks = async () => {
+    if(this.props.auth0.isAuthenticated){
+
+      const response = await this.props.auth0.getIdTokenClaims();
+      const jwt = response.__raw;
+      console.log(jwt);
+    }
+
+    
     let bookData = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
     this.setState({
       books: bookData.data,
@@ -84,4 +93,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);
